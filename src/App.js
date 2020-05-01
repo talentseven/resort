@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import Logo from './images/logo.svg';
 import './App.css';
 
 
@@ -10,8 +10,6 @@ import Error from './pages/Error'
 
 import {Route, Switch, Router} from 'react-router-dom' 
 import SingleRoom from './pages/SingleRoom';
-
-
 import Navbar from './Components/Navbar'
 
 
