@@ -1,22 +1,17 @@
 import React from 'react' 
 import Hero from "../Components/Hero"
-
-
-// export default function Rooms() {
-//     return (
-//         // <div>
-//         //     Hello from Rooms Page.
-//         // </div>
-//             <Hero hero = "roomHero"></Hero>
-    
-//         )
-// }
-// import React from 'react'
+import Banner from "../Components/Banner"
+import {Link} from "react-router-dom"
 
 const Rooms = () => {
     return (
-        <Hero hero = "roomsHero">            
-        </Hero>
+        <Hero hero = "roomsHero">      
+            <Banner title="our rooms">
+                <Link to='/' className='btn-primary'>
+                    return home    
+                </Link>    
+            </Banner>      
+        </Hero> 
     )
 }
 
