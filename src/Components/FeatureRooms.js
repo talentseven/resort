@@ -10,6 +10,9 @@ export default class FeatureRooms extends Component {
         // const value = this.context;
         // console.log(value);
 
+        const {featureRooms : rooms} = this.context;
+        console.log(rooms)
+
         return ( 
             <div>
                 Hello FeatureRooms!{greeting} {name} 
@@ -17,3 +20,4 @@ export default class FeatureRooms extends Component {
         )
     }
 }
+
