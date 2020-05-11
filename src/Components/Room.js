@@ -19,7 +19,7 @@ export default function Room({room}) {
                     <p>per night</p>
                 </div>
 
-                <Link to={`/rooms/'${slug}`} className='btn-primary room-link'>
+                <Link to={`/rooms/${slug}`} className='btn-primary room-link'>
                     Features
                 </Link>
             </div>
