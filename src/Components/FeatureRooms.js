@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {RoomContext} from '../Context'
 import Loading from './Loading'
+import Room from './Room'
+import Title from './Title'
 
 
 export default class FeatureRooms extends Component {
@@ -11,14 +13,30 @@ export default class FeatureRooms extends Component {
         // const value = this.context;
         // console.log(value);
 
-        const {featureRooms : rooms} = this.context;
+        let {loading, featureRooms: rooms} = 
+        this.context;
+        rooms = rooms.map(room =>{
+            return <Room key={room.id} room={room}/>
+        })
         console.log(rooms)
 
+
+
+        // console.log(rooms)
+        // rooms = rooms
+        // rooms = rooms.map (room => {
+        //     return <Room key={room.id} room={room}/>
+        // });
+
         return ( 
-            <div>
-                Hello FeatureRooms!
-                <Loading/>
-            </div>
+            <section className='featured-rooms'>
+                <Title title ='featured rooms'></Title>
+                <div className = 'featured-rooms-center'>
+                    {loading ? <Loading /> : rooms }
+                </div>
+                {/* <Room/> */}
+                {/* <Loading/> */}
+            </section>
         )
     }
 }
