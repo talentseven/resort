@@ -1,13 +1,14 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import defaultImg from '../images/room-1.jpeg'
 import PropTypes from 'prop-types'
+import RoomsContainer from './RoomContainer'
 
 
-export default function Room({room}) {
+export default function Room({ room }) {
     // console.log(room)
 
-    const {name, slug, images, price} = room;
+    const { name, slug, images, price } = room;
 
 
     return (
@@ -24,7 +25,7 @@ export default function Room({room}) {
                 </Link>
             </div>
 
-    <p className='room-info'>{name}</p>
+            <p className='room-info'>{name}</p>
 
         </article>
     )
@@ -32,9 +33,9 @@ export default function Room({room}) {
 
 Room.protoTypes = {
     room: PropTypes.shape({
-        name:PropTypes.string.isRequired,
-        slug:PropTypes.string.isRequired,
-        images:PropTypes.arrayOf(PropTypes.string).isRequired,
-        price:PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        slug: PropTypes.string.isRequired,
+        images: PropTypes.arrayOf(PropTypes.string).isRequired,
+        price: PropTypes.number.isRequired,
     })
 }

@@ -12,35 +12,49 @@ class RoomProvider extends Component {
 
     // room state
     state = {
-        room:[],
-        sortedRooms:[],
-        featureRooms:[],
-        loading:true
+        room: [],
+        sortedRooms: [],
+        featureRooms: [],
+        loading: true,
+        type: 'all',
+        price: 0,
+        minPrice: 0,
+        maxPrice: 0,
+        minSize: 0,
+        maxSize: 0,
+        breakfast: false,
+        pets: false
     };
 
     /**
      * getData method
      */
-    componentDidMount(){
+    componentDidMount() {
         let rooms = this.formatData(items);
-        let featureRooms = rooms.filter(room => room.featured === true); 
+        let featureRooms = rooms.filter(room => room.featured === true);
+        let maxPrice = Math.max(...rooms.map(item => item.price))
+        let maxSize = Math.max(...rooms.map(item => item.size))
+
         this.setState({
             rooms,
             featureRooms,
             sortedRooms: rooms,
-            loading: false
+            loading: false,
+            price: maxPrice,
+            maxPrice,
+            maxSize
         });
         // console.log(rooms);
     };
 
-    formatData(items){
-        let tempItems = items.map (item=>{
-            
+    formatData(items) {
+        let tempItems = items.map(item => {
+
             let id = item.sys.id;
-            let images = item.fields.images.map(images=>images.fields.file.url)
+            let images = item.fields.images.map(images => images.fields.file.url)
             // let images = items.fields.images.map(image=> image.fields.file.url );
 
-            let room = {...item.fields,images, id};
+            let room = { ...item.fields, images, id };
             return room;
         });
         return tempItems;
@@ -54,13 +68,26 @@ class RoomProvider extends Component {
     };
 
 
+    handleChange = event => {
+        const type = event.target.type
+        const name = event.target.name
+        const value = event.target.value
+        console.log(type, name, value);
+
+    }
+
+    filterRooms = () => {
+        console.log('hello')
+    }
+
     render() {
         return (
-            <RoomContext.Provider 
-            value={{
+            <RoomContext.Provider
+                value={{
                     ...this.state,
-                    getRoom: this.getRoom
-                    }}>
+                    getRoom: this.getRoom,
+                    handleChange: this.handleChange
+                }}>
                 {this.props.children}
             </RoomContext.Provider>
         );
@@ -69,4 +96,13 @@ class RoomProvider extends Component {
 
 const RoomConsumer = RoomContext.Consumer;
 
-export {RoomProvider, RoomConsumer, RoomContext};
+
+export function withRoomConsumer(Component) {
+    return function ConsumerWrapper(props) {
+        return <RoomConsumer>
+            {value => <Component {...props} context={value}></Component>}
+        </RoomConsumer>
+    }
+}
+
+export { RoomProvider, RoomConsumer, RoomContext };
