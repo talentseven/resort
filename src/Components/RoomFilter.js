@@ -19,7 +19,7 @@ export default function RoomsFilter({ rooms }) {
     } = context;
 
     let types = getUnique(rooms, 'type');
-    console.log(types)
+    // console.log(types)
     types = ["all", ...types]
     types = types.map((item, index) => {
         return <option value={item} key={index}>{item}</option>
