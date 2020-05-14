@@ -1,11 +1,10 @@
 import React from 'react'
 import { useContext } from 'react'
-import { RoomContext } from '../Context'
+import { RoomContext } from '../context'
 import Title from '../Components/Title'
 
 
-// get all unique values 
-
+// get all unique values
 const getUnique = (items, value) => {
     return [...new Set(items.map(item => item[value]))]
 }
@@ -22,12 +21,29 @@ export default function RoomsFilter({ rooms }) {
     // console.log(types)
     types = ["all", ...types]
     types = types.map((item, index) => {
-        return <option value={item} key={index}>{item}</option>
+        return (
+            <option value={item} key={index}>
+                {item}
+            </option>
+        )
     })
+
+    let people = getUnique(rooms, 'capacity');
+    people = people.map((item, index) => {
+        return (
+            <option key={index} value={item}>
+                {item}
+            </option>
+        )
+    })
+
+
     return (
         <section className='filter-container'>
             <Title title='search rooms'></Title>
             <form className='filter-form'>
+
+                {/*Type Filter */}
                 <div className='form-group'>
                     <label htmlFor='type'>room type</label>
                     <select
@@ -40,6 +56,43 @@ export default function RoomsFilter({ rooms }) {
                         {types}
                     </select>
                 </div>
+                {/*End Type Filter */}
+
+                {/*Guest Filter */}
+                <div className='form-group'>
+                    <label htmlFor='capacity'>Guest</label>
+                    <select
+                        name="capacity"
+                        id="capacity"
+                        value={capacity}
+                        className="form-control"
+                        onChange={handleChange}
+                    >
+                        {people}
+                    </select>
+                </div>
+                {/*End Guest Filter */}
+
+                {/*Room Price  Filter */}
+                <div className='form-group'>
+                    <label htmlFor='price'>
+                        room price ${price}
+                    </label>
+                    <input
+                        type="range"
+                        name="price"
+                        min={minPrice}
+                        max={maxPrice}
+                        id="price"
+                        value={price}
+                        onChange={handleChange}
+                        className="form-control"
+                    />
+                </div>
+
+                {/*End Room Price Filter */}
+
+
             </form>
         </section>
     )
